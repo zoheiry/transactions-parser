@@ -18,8 +18,6 @@ const nameOccurences = data.reduce((groupedNames, row) => {
 }, {});
 
 const namesSortedByOccurence = Object.keys(nameOccurences).sort((a, b) => nameOccurences[a] < nameOccurences[b] ? 1 : -1);
-const csvHeader = 'count;name';
 const csvRows = namesSortedByOccurence.map(name => `${nameOccurences[name]};${name}`).join('\n');
-const output = `${csvHeader}\n${csvRows}`;
 
-fs.writeFileSync(OUTPUT_FILE, output);
+fs.writeFileSync(OUTPUT_FILE, csvRows);
