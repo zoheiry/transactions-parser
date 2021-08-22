@@ -2,6 +2,7 @@ import React from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
 import transactions from './transactions.json';
 import styled from 'styled-components';
+import Price from './components/Price';
 
 const Wrapper = styled('div')`
   padding: 40px;
@@ -22,40 +23,45 @@ const columns = [
     width: '300px',
   },
   {
+    name: 'Category',
+    selector: 'category',
+    sortable: true,
+    width: '150px',
+  },
+  {
     name: 'To account',
     selector: 'toAccount',
     sortable: true,
     width: '200px',
   },
   {
-    name: 'Code',
-    selector: 'code',
-    sortable: true,
-    width: '100px',
-  },
-  {
     name: 'Type',
     selector: 'type',
     sortable: true,
+    center: true,
     width: '150px',
   },
   {
     name: 'Outgoing',
-    selector: 'outgoing',
+    selector: ({ outgoing }) => outgoing ? '✓' : '',
     sortable: true,
+    center: true,
     width: '100px',
   },
   {
     name: 'Incoming',
-    selector: 'incoming',
+    selector: ({ incoming }) => incoming ? '✓' : '',
     sortable: true,
+    center: true,
     width: '100px',
   },
   {
     name: 'Amount',
-    selector: (row) => parseFloat(row.amountInCents / 100).toFixed(2),
+    cell: ({ amountInCents }) => <Price amountInCents={amountInCents} />,
+    selector: 'amountInCents',
     sortable: true,
-    sortFunction: (rowA, rowB) => rowA.amountInCents > rowB.amountInCents ? 1 : -1,
+    sortFunction: (rowA, rowB) => Math.abs(rowA.amountInCents) > Math.abs(rowB.amountInCents) ? 1 : -1,
+    center: true,
     width: '100px',
   },
   {
@@ -64,7 +70,7 @@ const columns = [
     sortable: true,
     width: '400px',
     wrap: true,
-  },
+  }
 ]
 
 function App() {
@@ -75,6 +81,8 @@ function App() {
         data={transactions}
         striped
         pagination
+        highlightOnHover
+        paginationRowsPerPageOptions={[10, 50, 100, 1000, 10000]}
       />
     </Wrapper>
   );
