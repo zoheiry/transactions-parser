@@ -49,10 +49,10 @@ export const columns = [
     },
     {
       name: 'Amount',
-      cell: ({ amountInCents }) => <Price amountInCents={amountInCents} />,
-      selector: 'amountInCents',
+      cell: ({ amount }) => <Price amount={amount} />,
+      selector: 'amount',
       sortable: true,
-      sortFunction: (rowA, rowB) => Math.abs(rowA.amountInCents) > Math.abs(rowB.amountInCents) ? 1 : -1,
+      sortFunction: (rowA, rowB) => Math.abs(rowA.amount) > Math.abs(rowB.amount) ? 1 : -1,
       center: true,
       width: '100px',
     },

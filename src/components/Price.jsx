@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { number } from 'prop-types';
-import formatAmountInCents from '../utils/formatAmountInCents';
+import formatAmount from '../utils/formatAmount';
 
 const Wrapper = styled('strong')`
     color: ${({ incoming }) => incoming ? '#118c4f' : '#be3c3a'};
 `;
 
-const Price = ({ amountInCents }) => {
-    const amount = formatAmountInCents(amountInCents);
-    return <Wrapper incoming={amountInCents > 0}>{amount}</Wrapper>;
+const Price = ({ amount }) => {
+    const formattedAmount = formatAmount(amount);
+    return <Wrapper incoming={amount > 0}>{formattedAmount}</Wrapper>;
 };
 
 Price.propTypes = {
-    amountInCents: number,
+    amount: number,
 }
 
 export default Price;

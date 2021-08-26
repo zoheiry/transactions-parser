@@ -47,7 +47,7 @@ const transactions = data.map(row => {
 	const date = `${dateString.substr(0, 4)}-${dateString.substr(4, 2)}-${dateString.substr(6, 2)}`;
 	const incoming = transaction[5] === INCOMING;
 	const outgoing = transaction[5] === OUTGOING;
-	const amountInCents = transaction[6] ? parseFloat(transaction[6].replace(',', '.')).toFixed(2) * 100 : 0;
+	const amount = transaction[6] ? Number(transaction[6].replace(',', '.')).toFixed(2) : 0;
 	
 	return {
 		date,
@@ -58,7 +58,7 @@ const transactions = data.map(row => {
 		type: CODES[transaction[4]],
 		outgoing,
 		incoming,
-		amountInCents: incoming ? amountInCents : amountInCents * -1,
+		amount: incoming ? amount : amount * -1,
 		notes: transaction[8],
 		category: getCategory(name),
 	}

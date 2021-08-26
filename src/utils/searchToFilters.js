@@ -3,7 +3,7 @@ const searchToFilters = (searchTerm = '') => {
     
     return optionsArray?.reduce((res, option) => ({
         ...res,
-        [option.split(':')[0]?.trim()]: option.split(':')[1]?.trim()
+        [option.split(/:(.+)/, 2)[0]?.trim()]: option.split(/:(.+)/)[1]?.trim()
     }), {}) || {};
 };
 
