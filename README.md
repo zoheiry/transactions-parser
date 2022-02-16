@@ -1,3 +1,6 @@
+### Transactions parser
+This is a web application to display personal bank transactions data to give insights on spending/saving habits. It uses machine learning text classification to categorize each transaction into a pre-defined category.
+
 ### Categories
 - food
 - transportation
